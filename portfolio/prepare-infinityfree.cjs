@@ -1,0 +1,34 @@
+// Executar apenas para regenerar a versão inicial a partir do portefólio estático.
+const fs=require('fs'),vm=require('vm'),path=require('path');
+const root=__dirname, dest=path.join(root,'infinityfree');
+const script=fs.readFileSync(path.join(root,'dist/app.js'),'utf8');
+const projects=vm.runInNewContext(script.slice(0,script.indexOf('function visual'))+';projects');
+projects.forEach((p,i)=>{p.id='project-'+(i+1);p.image=''});
+const profile={name:'Alfredo Almeida Mbebe',title:'Desenvolvedor Full Stack | Especialista em Java',headline:'Transformo ideias em soluções digitais.',intro:'Desenvolvedor Full Stack com especialização em Java e vontade de resolver problemas reais através do código.',about:'Estudo Licenciatura em Informática de Sistemas no ISCIM e tenho mais de três anos de experiência prática em projectos de informática.\n\nDesenvolvo aplicações desktop e web, sistemas de gestão e soluções automatizadas, ligando interfaces intuitivas a bases de dados bem estruturadas.\n\nO meu interesse está em criar sistemas eficientes que resolvam problemas empresariais. Procuro desafios que me permitam aperfeiçoar competências e contribuir para a transformação digital das organizações.',education:'Licenciatura em Informática de Sistemas',institution:'ISCIM · Em formação',contact_text:'Procuras um desenvolvedor para a tua equipa ou tens uma ideia para concretizar? Conhece o meu trabalho e entra em contacto.',github:'https://github.com/mbeve235',linkedin:'',whatsapp:'',email:'',photo:''};
+const skills={languages:['Java','Python','PHP','JavaScript','C#','HTML5','CSS3'],frameworks:['Node.js','Next.js','Tailwind CSS','MySQL','MariaDB','Prisma ORM'],tools:['Git','GitHub','VS Code','XAMPP','Swagger'],specialties:['FULL STACK','APLICAÇÕES DESKTOP','SISTEMAS DE GESTÃO','BASES DE DADOS & CRUD','APIs & AUTOMAÇÃO','INTERFACES RESPONSIVAS']};
+fs.writeFileSync(path.join(dest,'seed.json'),JSON.stringify({profile,skills,projects},null,2));
+let html=fs.readFileSync(path.join(root,'dist/index.html'),'utf8');
+html=html.replace('<title>Alfredo Mbebe · Full Stack Developer</title>','<title><?=e($profile["name"])?> · <?=e($profile["title"])?></title>');
+html=html.replace(/<h1>.*?<\/h1>/,'<h1><?=e($profile["headline"])?></h1>');
+html=html.replace(/<p class="intro">.*?<\/p>/,'<p class="intro">Olá, sou <strong><?=e($profile["name"])?>.</strong><br><?=e($profile["intro"])?></p>');
+html=html.replaceAll('href="https://github.com/mbeve235"','href="<?=e(safeUrl($profile[\'github\']))?>"');
+html=html.replace('<div class="hero-art"','<?php if(!empty($profile["photo"])): ?><div><img class="profile-photo" src="<?=e($profile["photo"])?>" alt="<?=e($profile["name"])?>"></div><?php else: ?><div class="hero-art"');
+html=html.replace('</div></section>\n<div class="tech-strip">','</div><?php endif; ?></section>\n<div class="tech-strip">');
+html=html.replace(/<div class="about-copy">.*?<div class="education">/,'<div class="about-copy"><h3><?=e($profile["name"])?></h3><?php foreach(preg_split("/\\\\R\\\\s*\\\\R/",$profile["about"]) as $paragraph): ?><p><?=nl2br(e($paragraph))?></p><?php endforeach; ?><div class="education">');
+html=html.replace('<strong>Licenciatura em Informática de Sistemas</strong><small>ISCIM · Em formação</small>','<strong><?=e($profile["education"])?></strong><small><?=e($profile["institution"])?></small>');
+html=html.replace(/<div class="skills">.*?<\/div><\/section>/,'<div class="skills"><?php foreach(["languages"=>"Linguagens","frameworks"=>"Frameworks e dados","tools"=>"Ferramentas"] as $key=>$label): ?><article><span class="skill-icon">&lt;/&gt;</span><h3><?=e($label)?></h3><div class="tags"><?php foreach($content["skills"][$key] as $skill): ?><span><?=e($skill)?></span><?php endforeach; ?></div></article><?php endforeach; ?></div><div class="specialties"><?php foreach($content["skills"]["specialties"] as $skill): ?><span><?=e($skill)?></span><?php endforeach; ?></div></section>');
+html=html.replace(/<p>Procuras um desenvolvedor.*?<\/p>/,'<p><?=nl2br(e($profile["contact_text"]))?></p>');
+html=html.replace('Encontrar-me no GitHub <span>↗</span></a></section>','Encontrar-me no GitHub <span>↗</span></a><?php foreach(["linkedin"=>"LinkedIn","whatsapp"=>"WhatsApp"] as $key=>$label): if(!empty($profile[$key])): ?> <a class="button" href="<?=e(safeUrl($profile[$key]))?>" target="_blank" rel="noopener noreferrer"><?=e($label)?> ↗</a><?php endif; endforeach; ?><?php if(!empty($profile["email"])): ?> <a class="button" href="mailto:<?=e($profile["email"])? >">E-mail ↗</a><?php endif; ?></section>');
+html=html.replace('? >','?>');
+html=html.replace('Alfredo Almeida Mbebe</p>','<?=e($profile["name"])?></p>');
+html=html.replace('<script src="app.js"></script>','<script id="portfolio-data" type="application/json"><?=json_encode($content["projects"],JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS|JSON_HEX_QUOT|JSON_THROW_ON_ERROR)?></script><script src="app.js"></script>');
+fs.writeFileSync(path.join(dest,'index.php'),'<?php require __DIR__."/lib.php"; $content=loadContent(); $profile=$content["profile"]; ?>\n'+html);
+let js=script.slice(script.indexOf('function visual'));
+// Todos os dados interpolados em HTML são escapados, incluindo os obtidos da base de dados.
+js='const esc=value=>String(value??"").replace(/[&<>"\x27]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",\x27"\x27:"&quot;","\x27":"&#39;"}[c]));\nconst raw=JSON.parse(document.getElementById("portfolio-data").textContent);\nconst projects=raw.map(p=>({...p,title:esc(p.title),type:esc(p.type),description:esc(p.description),label:esc(p.label),category:["web","desktop","auto"].includes(p.category)?p.category:"web",bg:/^#[a-f0-9]{6}$/i.test(p.bg)?p.bg:"#e9effe",accent:/^#[a-f0-9]{6}$/i.test(p.accent)?p.accent:"#2563eb",tags:p.tags.map(esc),image:/^uploads\\/[a-f0-9]{32}\\.(jpg|png|webp)$/.test(p.image||"")?p.image:"",links:(p.links||[]).filter(l=>/^https?:\\/\\//i.test(l[1])).map(l=>[esc(l[0]),esc(l[1])])}));\n'+js;
+js=js.replace('function visual(p){','function visual(p){if(p.image)return \'<img class="project-image" src="\'+p.image+\'" alt="" loading="lazy">\';');
+js=js.replace('(p.links?p.links.map','(p.links?.length?p.links.map');
+fs.writeFileSync(path.join(dest,'app.js'),js);
+fs.copyFileSync(path.join(root,'dist/style.css'),path.join(dest,'style.css'));
+fs.appendFileSync(path.join(dest,'style.css'),'\n.project-visual:has(.project-image){padding:0}.project-image{width:100%;height:100%;object-fit:cover}.profile-photo{width:100%;max-height:460px;object-fit:cover;border-radius:12px}.contact .button{margin:5px}\n');
+console.log('Versão InfinityFree preparada.');

@@ -1,0 +1,5 @@
+DirectoryIndex index.php
+Options -Indexes
+<FilesMatch "^(config(\.example)?\.php|lib\.php|seed\.json)$">
+Require all denied
+</FilesMatch>

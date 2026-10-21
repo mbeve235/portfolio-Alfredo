@@ -1,0 +1,171 @@
+{
+  "profile": {
+    "name": "Alfredo Almeida Mbebe",
+    "title": "Desenvolvedor Full Stack | Especialista em Java",
+    "headline": "Transformo ideias em soluções digitais.",
+    "intro": "Desenvolvedor Full Stack com especialização em Java e vontade de resolver problemas reais através do código.",
+    "about": "Estudo Licenciatura em Informática de Sistemas no ISCIM e tenho mais de três anos de experiência prática em projectos de informática.\n\nDesenvolvo aplicações desktop e web, sistemas de gestão e soluções automatizadas, ligando interfaces intuitivas a bases de dados bem estruturadas.\n\nO meu interesse está em criar sistemas eficientes que resolvam problemas empresariais. Procuro desafios que me permitam aperfeiçoar competências e contribuir para a transformação digital das organizações.",
+    "education": "Licenciatura em Informática de Sistemas",
+    "institution": "ISCIM · Em formação",
+    "contact_text": "Procuras um desenvolvedor para a tua equipa ou tens uma ideia para concretizar? Conhece o meu trabalho e entra em contacto.",
+    "github": "https://github.com/mbeve235",
+    "linkedin": "",
+    "whatsapp": "",
+    "email": "",
+    "photo": ""
+  },
+  "skills": {
+    "languages": [
+      "Java",
+      "Python",
+      "PHP",
+      "JavaScript",
+      "C#",
+      "HTML5",
+      "CSS3"
+    ],
+    "frameworks": [
+      "Node.js",
+      "Next.js",
+      "Tailwind CSS",
+      "MySQL",
+      "MariaDB",
+      "Prisma ORM"
+    ],
+    "tools": [
+      "Git",
+      "GitHub",
+      "VS Code",
+      "XAMPP",
+      "Swagger"
+    ],
+    "specialties": [
+      "FULL STACK",
+      "APLICAÇÕES DESKTOP",
+      "SISTEMAS DE GESTÃO",
+      "BASES DE DADOS & CRUD",
+      "APIs & AUTOMAÇÃO",
+      "INTERFACES RESPONSIVAS"
+    ]
+  },
+  "projects": [
+    {
+      "title": "AMBEBE",
+      "type": "COMÉRCIO ELECTRÓNICO",
+      "category": "web",
+      "description": "Plataforma orientada para o mercado moçambicano, com gestão de produtos, vendas, pedidos, stock e administração.",
+      "tags": [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Express",
+        "Prisma",
+        "MySQL"
+      ],
+      "bg": "#e9effe",
+      "accent": "#2563eb",
+      "visual": "dashboard",
+      "label": "AMBEBE",
+      "links": [
+        [
+          "Frontend",
+          "https://github.com/mbeve235/ambebe-frontend"
+        ],
+        [
+          "Backend",
+          "https://github.com/mbeve235/ambebe-backend"
+        ]
+      ],
+      "id": "project-1",
+      "image": ""
+    },
+    {
+      "title": "Sistema de Gestão Escolar",
+      "type": "APLICAÇÃO WEB",
+      "category": "web",
+      "description": "Gestão de alunos, docentes, turmas, disciplinas, planos de ensino e notas, com controlo de acesso e acompanhamento académico.",
+      "tags": [
+        "PHP",
+        "MySQL",
+        "JavaScript",
+        "Laravel"
+      ],
+      "bg": "#e9f5f0",
+      "accent": "#167c65",
+      "visual": "dashboard",
+      "label": "Gestão Escolar",
+      "id": "project-2",
+      "image": ""
+    },
+    {
+      "title": "Aplicações desktop em Java",
+      "type": "PROGRAMAÇÃO ORIENTADA A OBJECTOS",
+      "category": "desktop",
+      "description": "Aplicações integradas com bases de dados relacionais, organizadas em classes e com operações de gestão de informação.",
+      "tags": [
+        "Java",
+        "POO",
+        "Bases de dados"
+      ],
+      "bg": "#ecedf5",
+      "accent": "#475569",
+      "visual": "code",
+      "id": "project-3",
+      "image": ""
+    },
+    {
+      "title": "Chatbot para WhatsApp",
+      "type": "INTELIGÊNCIA ARTIFICIAL & AUTOMAÇÃO",
+      "category": "auto",
+      "description": "Automação de mensagens e integração de inteligência artificial para apoiar interacções com utilizadores.",
+      "tags": [
+        "Python",
+        "API da OpenAI",
+        "APIs"
+      ],
+      "bg": "#e3f3ea",
+      "accent": "#16a34a",
+      "visual": "chat",
+      "id": "project-4",
+      "image": ""
+    },
+    {
+      "title": "Sistema de Gestão de Notas",
+      "type": "DESENVOLVIMENTO WEB",
+      "category": "web",
+      "description": "Registo e acompanhamento de avaliações escolares, com organização de alunos, disciplinas, docentes e resultados académicos.",
+      "tags": [
+        "PHP",
+        "MySQL",
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "bg": "#efeafe",
+      "accent": "#7c3aed",
+      "visual": "dashboard",
+      "label": "Resultados académicos",
+      "id": "project-5",
+      "image": ""
+    },
+    {
+      "title": "Bíblia Online",
+      "type": "APLICAÇÃO WEB · PLANEADA",
+      "category": "web",
+      "description": "Projecto planeado para leitura bíblica, com diferentes traduções, selecção de livros e capítulos e administração de versões.",
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "PHP",
+        "MySQL"
+      ],
+      "bg": "#f4efe5",
+      "accent": "#a16207",
+      "visual": "book",
+      "planned": true,
+      "id": "project-6",
+      "image": ""
+    }
+  ]
+}

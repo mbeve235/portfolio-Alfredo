@@ -1,2 +1,5 @@
 portfolio-deploy.tar.gz
 portfolio/.git/
+portfolio/infinityfree/config.php
+portfolio/infinityfree/uploads/*
+!portfolio/infinityfree/uploads/.htaccess
