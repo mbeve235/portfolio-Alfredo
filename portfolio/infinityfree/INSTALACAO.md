@@ -22,6 +22,7 @@ htdocs/
   app.js
   style.css
   admin.css
+  admin.js
   uploads/
     .htaccess
 ```
@@ -29,6 +30,8 @@ htdocs/
 `install.php` e `seed.json` são necessários apenas durante a instalação inicial.
 
 ## Manutenção
+
+- Se guardar apenas texto devolver `403 Forbidden / openresty`, confirma que enviaste também `admin.js` e a versão actualizada de `admin.php`. O painel usa envio normal para texto e reserva `multipart/form-data` para imagens seleccionadas. Isto reduz envios multipart desnecessários, mas não corrige bloqueios gerais do servidor. Se persistir, comunica ao suporte o URL, a hora e a operação que falhou.
 
 - Faz cópias da base de dados pelo phpMyAdmin e da pasta `uploads`. Ambas são necessárias para recuperar o conteúdo.
 - Não substituas `config.php` nem apagues `uploads` ao actualizar o código.
