@@ -16,6 +16,7 @@ Esta é a versão PHP + MySQL. A pasta `../dist` continua a ser a versão estát
 htdocs/
   index.php
   admin.php
+  admin-view.php
   lib.php
   config.php
   .htaccess
